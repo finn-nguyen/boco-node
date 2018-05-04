@@ -1,6 +1,6 @@
 const express = require('express')
 const app = express()
-const logger = require('./logs')
+const logger = require('./logger')
 const moment = require('moment')
 const morgan = require('morgan')
 const port = process.env.PORT || 8080

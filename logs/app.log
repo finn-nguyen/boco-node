@@ -1,0 +1,2 @@
+{"level":"info","message":"::ffff:127.0.0.1 - - [04/May/2018:15:41:01 +0000] \"GET / HTTP/1.1\" 304 - \"-\" \"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:57.0) Gecko/20100101 Firefox/57.0\"\n","timestamp":"2018-05-04T15:41:01.140Z"}
+{"level":"info","message":"::ffff:127.0.0.1 - - [04/May/2018:15:42:31 +0000] \"GET / HTTP/1.1\" 304 - \"-\" \"Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:57.0) Gecko/20100101 Firefox/57.0\"\n","timestamp":"2018-05-04T15:42:31.709Z"}
