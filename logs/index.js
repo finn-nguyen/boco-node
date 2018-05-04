@@ -3,8 +3,8 @@ const winstonConfig = require('../config/winston')
 
 const logger = new winston.Logger({
   transports: [
-    new winston.transports.File(options.file),
-    new winston.transports.Console(options.console)
+    new winston.transports.File(winstonConfig.file),
+    new winston.transports.Console(winstonConfig.console)
   ],
   exitOnError: false, // do not exit on handled exceptions
 })
@@ -15,4 +15,4 @@ logger.stream = {
   }
 }
 
-export default logger
+module.exports = logger
