@@ -1,4 +1,5 @@
 const request = require('request')
+const db = require('../database')
 const logger = require('../logger')
 
 const crawlData = (url, parser) => {
