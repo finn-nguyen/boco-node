@@ -10,9 +10,9 @@ const logger = new winston.Logger({
 })
 
 logger.stream = {
-  write: (message, encoding) => {
-    logger.info(message)
-  }
-}
+  write: function(message, encoding) {
+    logger.info(message);
+  },
+};
 
 module.exports = logger

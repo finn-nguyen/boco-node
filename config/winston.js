@@ -1,10 +1,10 @@
 const winston = require('winston')
-const path = require('path')
+const rootPath = require('app-root-path')
 
 const options = {
   file: {
     level: 'info',
-    filename: path.resolve(__dirname, 'logs/app.log'),
+    filename: `${rootPath}/logs/app.log`,
     handleExceptions: true,
     json: true,
     maxsize: 5242880, // 5MB
