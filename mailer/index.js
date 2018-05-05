@@ -24,7 +24,6 @@ const getTransporter = () => {
 module.exports.sendEmail = (news) => {
 	const mailOptions = buildMailOptions(news.title, news.url)
 	const sender = getTransporter()
-	console.log(sender)
 	sender.sendMail(mailOptions, (err, info) => {
 		if (err) logger.error(err)
 		else {

@@ -1,11 +1,9 @@
 const News = require('../models/news')
 const mailer = require('../mailer')
 const logger = require('../logger')
-const db = require('../database')
+const schedule = require('node-schedule')
 
-logger.info('Running send email task')
-
-db.once('open', () => {
+const sendEmailTask = () => {
 	News.filterBySent()
 	.then(listNews => {
 		listNews.forEach(news => {
@@ -15,4 +13,12 @@ db.once('open', () => {
 		})
 	})
 	.catch(err => logger.error(err))
-})
+}
+
+module.exports.startMailWorker = () => {
+	logger.info('Start mail worker')
+	schedule.scheduleJob('* */1 * * * *', () => {
+		sendEmailTask()
+	})
+}
+

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const logger = require('../logger')
 
-mongoose.connect('mongodb://localhost:27017/boco-db')
+mongoose.connect(process.env.MONGODB_URL)
 
 const db = mongoose.connection
 

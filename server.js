@@ -4,7 +4,10 @@ const logger = require('./logger')
 const moment = require('moment')
 const morgan = require('morgan')
 const port = process.env.PORT || 8080
-const db = require('../database')
+require('dotenv').config()
+const db = require('./database')
+const crawler = require('./workers/crawler')
+const mailer = require('./workers/sentEmail')
 
 app.use(morgan('combined', { stream: logger.stream }))
 
@@ -12,6 +15,11 @@ app.get('/', (req, res) => {
 	res.send('Hello World')
 })
 
-app.listen(port, () => {
-	console.log(`Server is running at ${port}`)
+db.once('open', () => {
+	app.listen(port, () => {
+		logger.info(`Server is running at ${port}`)
+	})
+	crawler.startCrawler()
+	mailer.startMailWorker()
 })
+

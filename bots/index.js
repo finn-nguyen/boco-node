@@ -15,11 +15,7 @@ const crawlData = (url, parser) => {
 
 const saveToDatabase = (listNews) => {
 	listNews.forEach(news => {
-		News.create(news.title, news.url)
-			.then(model => {
-				logger.info(`Save to database success: {title: ${model.title}, url: ${model.url}, sent: ${model.sent}}`)
-			})
-			.catch(err => logger.error(err))
+		News.create(news.news_id, news.title, news.url)
 	})
 }
 

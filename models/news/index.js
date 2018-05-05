@@ -5,14 +5,24 @@ const Schema = mongoose.Schema
 const NewsSchema = new Schema({
 	title: String,
 	url: String,
-	sent: Boolean
+	sent: Boolean,
+	news_id: String
 })
 
 const News = mongoose.model('NewsModel', NewsSchema)
 
-module.exports.create = (title, url, sent = false) => {
-	const model = new News({ title, url, sent })
-	return model.save()
+module.exports.create = (news_id, title, url, sent = false) => {
+	News.findOne({ news_id: news_id })
+		.then(result => {
+			if (result == null) {
+				const model = new News({ news_id, title, url, sent })
+				return model.save()
+			} else {
+				logger.info(`News with id ${news_id} already existed`)
+				return new Promise((resolve, reject) => resolve(result))
+			}
+		})
+		.catch(err => logger.error(err))
 }
 
 module.exports.findAll = () => {
@@ -20,7 +30,7 @@ module.exports.findAll = () => {
 }
 
 module.exports.filterBySent = () => {
-	return News.find({ sent: false }).limit(10)
+	return News.find({ sent: false })
 }
 
 module.exports.update = (model) => {
