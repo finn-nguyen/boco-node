@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const logger = require('../logger')
 
-mongoose.connect(process.env.MONGODB_URL)
+mongoose.connect(process.env.MONGODB_URL_PRODUCTION)
 
 const db = mongoose.connection
 
