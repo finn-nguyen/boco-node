@@ -4,6 +4,7 @@ const logger = require('./logger')
 const moment = require('moment')
 const morgan = require('morgan')
 const port = process.env.PORT || 8080
+const db = require('../database')
 
 app.use(morgan('combined', { stream: logger.stream }))
 
