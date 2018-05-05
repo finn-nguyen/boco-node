@@ -12,7 +12,7 @@ const websites = [
 ]
 
 module.exports.startCrawler = () => {
-	schedule.scheduleJob('* */1 * * * *', () => {
+	schedule.scheduleJob('*/45 * * * * *', () => {
 		logger.info('Start crawler')
 		websites.forEach(site => bot.crawlData(site.url, site.parser))
 	})

@@ -16,10 +16,9 @@ module.exports.create = (news_id, title, url, sent = false) => {
 		.then(result => {
 			if (result == null) {
 				const model = new News({ news_id, title, url, sent })
-				return model.save()
+				model.save()
 			} else {
 				logger.info(`News with id ${news_id} already existed`)
-				return new Promise((resolve, reject) => resolve(result))
 			}
 		})
 		.catch(err => logger.error(err))
@@ -29,8 +28,20 @@ module.exports.findAll = () => {
 	return News.find()
 }
 
-module.exports.filterBySent = () => {
-	return News.find({ sent: false })
+module.exports.filterBySent = (currentPage, perPage) => {
+	return News.find({ sent: false }).skip(currentPage * perPage).limit(perPage)
+}
+
+module.exports.totalNewsNotSent = async() => {
+	try {
+		const result = await News.find({ sent: false })
+		logger.info(`There are ${result.length} news that is not sent`)
+		return result.length
+	}
+	catch (err) {
+		logger.error(err)
+		return 0
+	}
 }
 
 module.exports.update = (model) => {
