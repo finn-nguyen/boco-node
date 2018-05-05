@@ -1,4 +1,5 @@
 const mongoose = require('mongoose')
+const logger = require('../../logger')
 const Schema = mongoose.Schema
 
 const NewsSchema = new Schema({
@@ -19,5 +20,11 @@ module.exports.findAll = () => {
 }
 
 module.exports.filterBySent = () => {
-	return News.find({ sent: false })
+	return News.find({ sent: false }).limit(10)
+}
+
+module.exports.update = (model) => {
+	News.update({ _id: model._id }, model)
+		.then(result => logger.info('Update success'))
+		.catch(err => logger.error(err))
 }
